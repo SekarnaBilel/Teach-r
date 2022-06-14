@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     elevation: 9,
   },
   imageStyle: {
-    // backgroundPosition: "50%",
     width: 80,
     height: 80,
     borderRadius: 75,
