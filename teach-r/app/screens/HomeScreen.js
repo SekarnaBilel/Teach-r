@@ -5,17 +5,21 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.imageStyle}
+        style={styles.header}
+        source={require("../../assets/header.png")}
+      />
+      <Image
+        style={styles.logo}
         source={require("../../assets/logo.png")}
       />
       <Text style={styles.title}>Vos cours particuliers.</Text>
-      <Text style={styles.text3}>Dans l'heure</Text>
+      <Text style={styles.textBold}>Dans l'heure</Text>
       <TouchableOpacity
-        style={styles.button}
+        style={styles.btnBlue}
         onPress={() => navigation.navigate("Teach")}
       >
         <Image
-          style={styles.imgStyle}
+          style={styles.icone}
           source={require("../../assets/elevee.jpg")}
         />
         <Text style={styles.text}>Prendre des cours</Text>
@@ -26,12 +30,16 @@ const HomeScreen = ({ navigation }) => {
         onPress={() => navigation.navigate("Teach")}
       >
         <Image
-          style={styles.imgStyle}
+          style={styles.icone}
           source={require("../../assets/prof.jpg")}
         />
         <Text style={styles.text}>Donner des cours</Text>
         <Text style={styles.subtitle}>Je suis professeur</Text>
       </TouchableOpacity>
+      <Image
+        style={styles.footer}
+        source={require("../../assets/footer.png")}
+      />
     </View>
   );
 };
@@ -43,11 +51,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  imageStyle: {
+  header:{
+    position: "absolute",
+    top: -30,
+  },
+  logo: {
     position: "absolute",
     top: 190,
   },
-  imgStyle: {
+  icone: {
     // backgroundPosition: "50%",
     width: 80,
     height: 80,
@@ -62,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "rgb(74,114,172)",
   },
-  text3: {
+  textBold: {
     position: "absolute",
     top: 290,
     left: 250,
@@ -70,7 +82,7 @@ const styles = StyleSheet.create({
     color: "rgb(74,114,172)",
     fontWeight: "bold",
   },
-  button: {
+  btnBlue: {
     alignItems: "center",
     padding: 20,
     paddingBottom:30,
@@ -113,6 +125,10 @@ const styles = StyleSheet.create({
   subtitle: {
     color: "black",
   },
+  footer:{
+    position: "absolute",
+    bottom:-30,
+  }
 });
 
 export default HomeScreen;

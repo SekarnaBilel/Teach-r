@@ -1,10 +1,11 @@
 import { StyleSheet, SafeAreaView, View, Text } from "react-native";
 import Card from '../components/CardFavoris';
+import Carousel from '../components/Carousel';
 
 const FavorisScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-        <Card/>
+        <Carousel/>
     </View>
   );
 }
