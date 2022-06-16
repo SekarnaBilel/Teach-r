@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Utils\Exception;
 
 class Globals
 {

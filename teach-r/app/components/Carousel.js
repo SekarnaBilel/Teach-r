@@ -12,30 +12,30 @@ const exampleItems = [
     id_teacher: '',
   },
   {
-    img : require("../../assets/bilel.png"),
-    name : "Bilel Sekarna",
-    formation : "Epitech Marseille",
+    img : require("../../assets/enzo.jpg"),
+    name : "Enzo Scaduto",
+    formation : "Developpeur FullStack",
+    description: "Calme et patient, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
+    id_teacher: '',
+  },
+  {
+    img : require("../../assets/merwane.jpg"),
+    name : "Merwane Sekarna",
+    formation : "Chef de secteur",
     description: "Calme et patient, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
     id_teacher: '',
   },
   {
     img : require("../../assets/bilel.png"),
-    name : "Bilel Sekarna",
-    formation : "Epitech Marseille",
+    name : "Jessica Hénédia ",
+    formation : "GMF assurance",
     description: "Calme et patient, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
     id_teacher: '',
   },
   {
     img : require("../../assets/bilel.png"),
-    name : "Bilel Sekarna",
-    formation : "Epitech Marseille",
-    description: "Calme et patient, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
-    id_teacher: '',
-  },
-  {
-    img : require("../../assets/bilel.png"),
-    name : "Bilel Sekarna",
-    formation : "Epitech Marseille",
+    name : "Ali katasse",
+    formation : "",
     description: "Calme et patient, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
     id_teacher: '',
   },
@@ -90,12 +90,12 @@ const CustomCarousel = () => {
       />
       <Text style={styles.name}>{item.name}</Text>
       <View>
-        <Text style={styles.formation}>Formation</Text>
-        <Text style={styles.parcour}>{item.formation}</Text>
+        <Text style={styles.title}>Formation</Text>
+        <Text style={styles.text}>{item.formation}</Text>
       </View>
       <View>
-        <Text style={styles.formation}>Description</Text>
-        <Text style={styles.parcour}>{item.description}</Text>
+        <Text style={styles.title}>Description</Text>
+        <Text style={styles.text}>{item.description}</Text>
       </View>
       <View>
         <TouchableOpacity
@@ -162,13 +162,13 @@ const styles = StyleSheet.create({
     left: 130,
     top: 60,
   },
-  formation: {
+  title: {
     fontSize: 15,
     color: "grey",
     marginHorizontal: 30,
     marginVertical: 5,
   },
-  parcour: {
+  text: {
     fontSize: 15,
     color: "black",
     fontWeight: "bold",

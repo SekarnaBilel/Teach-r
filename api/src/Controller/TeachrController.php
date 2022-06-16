@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Utils\Globals;
 use App\Repository\TeachrRepository;
 use App\Entity\Teachr;
+use App\Controller\ErrorHttp;
 
 class TeachrController extends AbstractController
 {
@@ -21,29 +22,29 @@ class TeachrController extends AbstractController
     }
 
 
-    #[Route('/teachrs', name: 'teachrs')]
+    
     public function teachr(): JsonResponse
     {
         return $this->globals->success([
-            'teachrs' => array_map(function(Teachr $teachr){
+            'teachrs' => array_map(function (Teachr $teachr) {
                 return $teachr->toArray();
-            },$this->teachrRepository->findAll())
+            }, $this->teachrRepository->findAll())
         ]);
     }
 
+
     
-    #[Route('/register', name: 'register')]
     public function save(): JsonResponse
     {
-      $data = $this->globals->json_decode();
-      if(!isset($data->prenom))
-      return $this->globals->error();
+        $data = $this->globals->json_decode();
+        if (!isset($data->prenom))
+            return $this->globals->error(error: ErrorHttp::FORM_ERROR);
 
-      $teachr = new Teachr();
-      $teachr->setPrenom($data->prenom);
+        $teachr = new Teachr();
+        $teachr->setPrenom($data->prenom);
 
-      $this->getDoctrine()->getMannager()->persist($teachr);
-      $this->getDoctrine()->getMannager()->flush();
-      return $this->globals->success($teachr->toArray());
+        $this->getDoctrine()->getMannager()->persist($teachr);
+        $this->getDoctrine()->getMannager()->flush();
+        return $this->globals->success($teachr->toArray());
     }
 }
