@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
+
 import Carousel from "react-native-snap-carousel";
 
 const CustomCarousel = () => {
@@ -21,16 +22,13 @@ const CustomCarousel = () => {
   }, []);
 
   const getTeachr = () => {
-    //console.log(URL_API)
-    const uri = "https://0987-163-5-13-2.eu.ngrok.io"
-    axios.get(`${uri}/teachrs`)
+    fetch("https://http://127.0.0.1:8000/teachrs")
       .then(function (response) {
-        console.log(response.data.data.teachrs)
-        setCarouselItems(response.data.data.teachrs)
-        return response.data;
-      }).catch(function(error) {
-        console.log("error: " + error);
+        return response.json();
       })
+      .then(function (response) {
+        setCarouselItems(response.data);
+      });
   };
 
   const renderItem = useCallback(

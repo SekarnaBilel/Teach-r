@@ -37,14 +37,16 @@ class TeachrController extends AbstractController
     public function save(): JsonResponse
     {
         $data = $this->globals->json_decode();
-        if (!isset($data->prenom))
+        if (!isset($data->prenom,$data->formation,$data->description))
             return $this->globals->error(error: ErrorHttp::FORM_ERROR);
 
-        $teachr = new Teachr();
-        $teachr->setPrenom($data->prenom);
+        $teachrs = new Teachr();
+        $teachrs->setPrenom($data->prenom)
+               ->setFormation($data->formation)
+               ->setDescription($data->description);
 
-        $this->getDoctrine()->getMannager()->persist($teachr);
+        $this->teachrRepository()->getMannager()->persist($teachrs);
         $this->getDoctrine()->getMannager()->flush();
-        return $this->globals->success($teachr->toArray());
+        return $this->globals->success($teachrs->toArray());
     }
 }
