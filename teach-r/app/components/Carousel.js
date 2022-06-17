@@ -22,7 +22,7 @@ const CustomCarousel = () => {
 
   const getTeachr = () => {
     //console.log(URL_API)
-    const uri = "https://0987-163-5-13-2.eu.ngrok.io"
+    const uri = "https://5dc2-163-5-13-2.eu.ngrok.io" //
     axios.get(`${uri}/teachrs`)
       .then(function (response) {
         console.log(response.data.data.teachrs)

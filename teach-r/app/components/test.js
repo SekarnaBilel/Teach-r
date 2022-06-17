@@ -50,7 +50,6 @@ const CustomCarousel = () => {
         <View>
           <TouchableOpacity
             style={styles.btnBlue}
-            onPress={() => Alert.alert("Button with adjusted color pressed")}
           >
             <Text style={styles.textBtnBlue}>
               Prendre un cour avec ce Teach'r{" "}

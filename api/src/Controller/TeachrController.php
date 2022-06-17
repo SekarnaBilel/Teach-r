@@ -9,16 +9,19 @@ use App\Utils\Globals;
 use App\Repository\TeachrRepository;
 use App\Entity\Teachr;
 use App\Controller\ErrorHttp;
+use DateTime;
+use Doctrine\Persistence\ManagerRegistry;
 
 class TeachrController extends AbstractController
 {
 
     private Globals $globals;
     private TeachrRepository $teachrRepository;
-    public function __construct(Globals $globals, TeachrRepository $TeachrRepository)
+    public function __construct(Globals $globals, TeachrRepository $TeachrRepository, ManagerRegistry $doctrine)
     {
         $this->globals = $globals;
         $this->teachrRepository = $TeachrRepository;
+        $this->doctrine = $doctrine->getManager();
     }
 
 
@@ -40,13 +43,15 @@ class TeachrController extends AbstractController
         if (!isset($data->prenom,$data->formation,$data->description))
             return $this->globals->error(error: ErrorHttp::FORM_ERROR);
 
+
         $teachrs = new Teachr();
         $teachrs->setPrenom($data->prenom)
                ->setFormation($data->formation)
-               ->setDescription($data->description);
+               ->setDescription($data->description)
+               ->setDateDeCreation(new DateTime('now'));
 
-        $this->teachrRepository()->getMannager()->persist($teachrs);
-        $this->getDoctrine()->getMannager()->flush();
+        $this->doctrine->persist($teachrs);
+        $this->doctrine->flush();
         return $this->globals->success($teachrs->toArray());
     }
 }
