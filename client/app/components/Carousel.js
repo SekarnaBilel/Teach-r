@@ -31,9 +31,8 @@ const CustomCarousel = ({ navigation }) => {
           setCarouselItems(j.data.teachrs)
           
         })
-      console.log("toto");
     }catch(error){
-      console.log('bilel',error);
+      console.log(error);
     }
   };
 
