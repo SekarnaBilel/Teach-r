@@ -11,6 +11,7 @@ use App\Entity\Teachr;
 use App\Controller\ErrorHttp;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 
 class TeachrController extends AbstractController
 {
@@ -25,9 +26,11 @@ class TeachrController extends AbstractController
     }
 
 
-    
+
     public function teachr(): JsonResponse
     {
+        
+      
         return $this->globals->success([
             'teachrs' => array_map(function (Teachr $teachr) {
                 return $teachr->toArray();
@@ -36,19 +39,38 @@ class TeachrController extends AbstractController
     }
 
 
-    
+
     public function save(): JsonResponse
     {
         $data = $this->globals->json_decode();
-        if (!isset($data->prenom,$data->formation,$data->description))
+        if (!isset($data->image,$data->prenom, $data->formation, $data->description))
             return $this->globals->error(error: ErrorHttp::FORM_ERROR);
 
 
         $teachrs = new Teachr();
+        $teachrs->setImage($data->image)
+            ->setPrenom($data->prenom)
+            ->setFormation($data->formation)
+            ->setDescription($data->description)
+            ->setDateDeCreation(new DateTime('now'));
+
+        $this->doctrine->persist($teachrs);
+        $this->doctrine->flush();
+        return $this->globals->success($teachrs->toArray());
+    }
+
+    public function edit(Teachr $teachr): JsonResponse
+    {
+        $data = $this->globals->json_decode();
+        if (!$teachr) {
+
+            $teachrs = new Teachr();
+        }
+
         $teachrs->setPrenom($data->prenom)
-               ->setFormation($data->formation)
-               ->setDescription($data->description)
-               ->setDateDeCreation(new DateTime('now'));
+            ->setFormation($data->formation)
+            ->setDescription($data->description)
+            ->setDateDeCreation(new DateTime('now'));
 
         $this->doctrine->persist($teachrs);
         $this->doctrine->flush();

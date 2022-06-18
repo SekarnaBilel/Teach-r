@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import Carousel from "react-native-snap-carousel";
 
-const CustomCarousel = () => {
+const CustomCarousel = ({ navigation }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [carouselItems, setCarouselItems] = useState([]);
   const ref = useRef(null);
@@ -21,16 +21,20 @@ const CustomCarousel = () => {
   }, []);
 
   const getTeachr = () => {
-    //console.log(URL_API)
-    const uri = "https://5dc2-163-5-13-2.eu.ngrok.io" //
-    axios.get(`${uri}/teachrs`)
-      .then(function (response) {
-        console.log(response.data.data.teachrs)
-        setCarouselItems(response.data.data.teachrs)
-        return response.data;
-      }).catch(function(error) {
-        console.log("error: " + error);
-      })
+    console.log("bilel")
+    const uri = "https://3010-78-199-7-184.eu.ngrok.io/teachrs" 
+    try{
+
+      fetch(uri).then((r) => 
+        r.json()).then((j) => {
+          console.log(j.data.teachrs)
+          setCarouselItems(j.data.teachrs)
+          
+        })
+      console.log("toto");
+    }catch(error){
+      console.log('bilel',error);
+    }
   };
 
   const renderItem = useCallback(
@@ -38,7 +42,7 @@ const CustomCarousel = () => {
       <View style={styles.cardContainer}>
         <Image
           style={styles.imageStyle}
-          source={require("../../assets/bilel.png")}
+          source={{uri: `data:image/gif;base64,${item.image}`}}
         />
         <Text style={styles.name}>{item.prenom}</Text>
         <View>
@@ -52,7 +56,7 @@ const CustomCarousel = () => {
         <View>
           <TouchableOpacity
             style={styles.btnBlue}
-            onPress={() => Alert.alert("Button with adjusted color pressed")}
+            onPress={() => navigation.navigate("Teach")}
           >
             <Text style={styles.textBtnBlue}>
               Prendre un cour avec ce Teach'r{" "}
@@ -60,7 +64,7 @@ const CustomCarousel = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnRed}
-            onPress={() => navigation.navigate("")}
+            onPress={() => navigation.navigate("Teach")}
           >
             <Text style={styles.textBtnRed}>
               Retirer ce Teach'r de mes favoris{" "}

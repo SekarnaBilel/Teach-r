@@ -13,9 +13,12 @@ class Teachr
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\Column(type: 'blob')]
+    private $image;
+
     #[ORM\Column(type: 'string', length: 255)]
     private $prenom;
-    
+
     #[ORM\Column(type: 'string', length: 255)]
     private $formation;
 
@@ -29,11 +32,12 @@ class Teachr
     public function toArray(): array
     {
         return [
-            'id'=> $this->id,
-            'prenom'=> $this->prenom,
-            'formation'=> $this->formation,
-            'description'=> $this->description,
-            'date_de_creation'=> $this->date_de_creation
+            'id' => $this->id,
+            'image' => base64_encode(stream_get_contents($this->image)),
+            'prenom' => $this->prenom,
+            'formation' => $this->formation,
+            'description' => $this->description,
+            'date_de_creation' => $this->date_de_creation
         ];
     }
 
@@ -42,6 +46,17 @@ class Teachr
         return $this->id;
     }
 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
     public function getPrenom(): ?string
     {
         return $this->prenom;
@@ -88,5 +103,4 @@ class Teachr
 
         return $this;
     }
-
 }

@@ -12,3 +12,8 @@ Register:
     controller: App\Controller\TeachrController::save
     methods : POST
 
+Editer:
+    path: /teachrs/edit/{id}
+    controller: App\Controller\TeachrController::edit
+    methods : PUT
+
